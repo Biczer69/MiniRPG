@@ -16,11 +16,13 @@ class Warrior():
         if self.life_points <= 0:
             self.life_points = 0
 
-    def check_if_alive(self):
+    def check_if_alive(self): #True if alive
         if self.life_points == 0:
             return False
         else:
             return True
+
+    ####Functions that returne stats######
 
     def get_name(self):
         return self.name
@@ -34,35 +36,37 @@ class Warrior():
     def get_initiative(self):
         return self.initiative
 
+    def get_attacks(self):
+        return self.attacks
+
     def get_stats(self):
         print(f"Name is: {self.name} life = {self.life_points},dmg = {self.dmg_points}, initiative = {self.initiative}")
 
-
-
-    def get_attacks(self):
-        return self.attacks
+    ########################################
 
 def skirmish(player1,player2):
     print(player1.get_name(), "has higher initiative, therefore is first to attack!")
     while player1.check_if_alive and player2.check_if_alive:
 
+            ###Attack
             player2.defance(player1.get_dmg())
-            print(player1.get_name(),"attacks with",random.choice(player1.get_attacks()))
+            print(player1.get_name(), "attacks with" , random.choice(player1.get_attacks()))
             print(player2.get_name(), f"got {player1.get_dmg()} damage! Now he's got {player2.get_life()} life left")
             if not player2.check_if_alive():
                 print(player2.get_name()," died!")
                 return True
 
+            ###Counterattack
             player1.defance(player2.get_dmg())
             print(player2.get_name(),"attacks with",random.choice(player2.get_attacks()))
             print(player1.get_name(),f"got {player2.get_dmg()} damage! Now he's got {player1.get_life()} life left")
             if not player1.check_if_alive():
-                print(player2.get_name()," died")
+                print(player1.get_name()," died")
                 return False
 
 player1 = Warrior(input("Podaj imię pierwszego wojownika!\n"))
 player2 = Warrior(input("Podaj imię drugiego wojownika!\n"))
-input("Ready?")
+
 if player1.get_initiative() >= player2.get_initiative():
     skirmish(player1,player2)
 else:
