@@ -22,7 +22,7 @@ class Warrior():
         else:
             return True
 
-    ####Functions that returne stats######
+    ####Functions that return stats######
 
     def get_name(self):
         return self.name
